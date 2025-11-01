@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
+import Logo, { LogoWithGlow } from './Logo';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Header = ({ onMenuToggle, isMenuOpen = false }) => {
@@ -36,13 +37,12 @@ const Header = ({ onMenuToggle, isMenuOpen = false }) => {
             <Icon name={isMenuOpen ? 'X' : 'Menu'} size={24} />
           </Button>
 
-          <Link to="/user-dashboard" className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <Icon name="Zap" size={20} color="white" />
-            </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">
-              PromoHive
-            </span>
+          <Link to="/user-dashboard" className="transition-transform duration-300 hover:scale-105">
+            <LogoWithGlow 
+              size="md" 
+              className="cursor-pointer"
+              showText={true}
+            />
           </Link>
         </div>
 
