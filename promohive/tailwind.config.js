@@ -115,7 +115,10 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #00d4ff 0%, #ff0080 100%)', /* cyan-to-magenta */
+        'gradient-secondary': 'linear-gradient(45deg, #00d4ff 0%, #ff0080 50%, #00d4ff 100%)', /* animated gradient */
         'gradient-surface': 'linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.6) 100%)', /* slate-gradient */
+        'gradient-glass': 'linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%)',
+        'gradient-glow': 'radial-gradient(circle at center, rgba(0, 212, 255, 0.3) 0%, rgba(255, 0, 128, 0.3) 50%, transparent 70%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
@@ -125,9 +128,17 @@ export default {
         "fade-in": "fadeIn 0.3s ease-out",
         "fade-in-up": "fadeInUp 0.3s ease-out",
         "slide-in": "slideIn 0.3s ease-out",
+        "slide-up": "slideUp 0.4s ease-out",
+        "slide-down": "slideDown 0.4s ease-out",
+        "scale-in": "scaleIn 0.3s ease-out",
+        "bounce-in": "bounceIn 0.6s ease-out",
         "shimmer": "shimmer 2s infinite linear",
+        "gradient-shift": "gradientShift 3s ease-in-out infinite",
+        "float": "float 3s ease-in-out infinite",
+        "glow": "glow 2s ease-in-out infinite alternate",
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "bounce-slow": "bounce 2s infinite",
+        "spin-slow": "spin 3s linear infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -156,9 +167,72 @@ export default {
           from: { transform: "translateX(-100%)" },
           to: { transform: "translateX(0)" },
         },
+        slideUp: {
+          from: { 
+            opacity: "0",
+            transform: "translateY(30px)"
+          },
+          to: { 
+            opacity: "1",
+            transform: "translateY(0)"
+          },
+        },
+        slideDown: {
+          from: { 
+            opacity: "0",
+            transform: "translateY(-30px)"
+          },
+          to: { 
+            opacity: "1",
+            transform: "translateY(0)"
+          },
+        },
+        scaleIn: {
+          from: { 
+            opacity: "0",
+            transform: "scale(0.9)"
+          },
+          to: { 
+            opacity: "1",
+            transform: "scale(1)"
+          },
+        },
+        bounceIn: {
+          "0%": { 
+            opacity: "0",
+            transform: "scale(0.3)"
+          },
+          "50%": { 
+            opacity: "1",
+            transform: "scale(1.05)"
+          },
+          "70%": { 
+            transform: "scale(0.9)"
+          },
+          "100%": { 
+            opacity: "1",
+            transform: "scale(1)"
+          },
+        },
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
+        },
+        gradientShift: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        glow: {
+          "0%": { 
+            boxShadow: "0 0 5px rgba(0, 212, 255, 0.5), 0 0 10px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2)"
+          },
+          "100%": { 
+            boxShadow: "0 0 10px rgba(255, 0, 128, 0.5), 0 0 20px rgba(255, 0, 128, 0.3), 0 0 30px rgba(255, 0, 128, 0.2)"
+          },
         },
       },
       transitionDuration: {

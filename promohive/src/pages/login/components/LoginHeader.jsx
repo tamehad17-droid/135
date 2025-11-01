@@ -1,23 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
+import Logo, { LogoWithGlow } from '../../../components/ui/Logo';
 
 const LoginHeader = () => {
   return (
     <div className="text-center mb-8">
       {/* Logo */}
       <Link to="/" className="inline-block mb-6 hover:opacity-80 transition-opacity">
-        <div className="flex flex-col items-center gap-4">
-          <img 
-            src="/logo.png" 
-            alt="PromoHive"
-            className="w-20 h-20 object-contain drop-shadow-lg"
-          />
-          <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold text-gray-900">PromoHive</span>
-            <span className="text-sm text-gray-500">GLOBAL PROMO NETWORK</span>
-          </div>
-        </div>
+        <LogoWithGlow 
+          size="xl" 
+          className="justify-center"
+          animated={true}
+        />
+        <p className="text-sm text-text-secondary mt-2 font-medium tracking-wide">
+          GLOBAL PROMO NETWORK
+        </p>
       </Link>
 
       {/* Welcome Text */}

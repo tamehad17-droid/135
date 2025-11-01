@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
+import Logo, { LogoIcon } from './Logo';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Sidebar = ({ isCollapsed = false, onToggle, className = '' }) => {
@@ -197,23 +198,32 @@ const Sidebar = ({ isCollapsed = false, onToggle, className = '' }) => {
         {/* Sidebar Header */}
         <div className="p-6 border-b border-border">
           <div className="flex items-center justify-between">
-            {!isCollapsed && (
-              <div>
-                <h2 className="text-lg font-semibold text-foreground">Navigation</h2>
-                <p className="text-sm text-text-secondary">
-                  {user?.role === 'admin' ? 'Admin Panel' : 'User Dashboard'}
-                </p>
+            {!isCollapsed ? (
+              <div className="flex items-center space-x-3">
+                <LogoIcon size="sm" variant="glow" />
+                <div>
+                  <h2 className="text-lg font-semibold text-foreground">Navigation</h2>
+                  <p className="text-sm text-text-secondary">
+                    {user?.role === 'admin' ? 'Admin Panel' : 'User Dashboard'}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex justify-center w-full">
+                <LogoIcon size="sm" variant="glow" />
               </div>
             )}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onToggle}
-              className="hidden lg:flex"
-              aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            >
-              <Icon name={isCollapsed ? 'ChevronRight' : 'ChevronLeft'} size={20} />
-            </Button>
+            {!isCollapsed && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onToggle}
+                className="hidden lg:flex"
+                aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              >
+                <Icon name={isCollapsed ? 'ChevronRight' : 'ChevronLeft'} size={20} />
+              </Button>
+            )}
           </div>
         </div>
 

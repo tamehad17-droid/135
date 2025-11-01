@@ -6,6 +6,7 @@ import ProtectedRoute from "components/ProtectedRoute";
 import NotFound from "pages/NotFound";
 
 // Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'));
 const AdminDashboard = lazy(() => import('./pages/admin-dashboard'));
 const AdminSettings = lazy(() => import('./pages/admin-settings'));
 const ProofsReview = lazy(() => import('./pages/proofs-review'));
@@ -45,10 +46,10 @@ const Routes = () => {
       <Suspense fallback={<LoadingFallback />}>
         <RouterRoutes>
           {/* Public routes */}
-          <Route path="/admin-wallets" element={<ProtectedRoute requireAdmin={true}><AdminWallets /></ProtectedRoute>} />
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/admin-wallets" element={<ProtectedRoute requireAdmin={true}><AdminWallets /></ProtectedRoute>} />
           
           {/* Admin routes - require admin role */}
           <Route path="/admin-dashboard" element={<ProtectedRoute requireAdmin={true}><AdminDashboard /></ProtectedRoute>} />

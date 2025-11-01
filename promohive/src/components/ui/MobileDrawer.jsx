@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import Button from './Button';
+import Logo from './Logo';
 
 const MobileDrawer = ({ isOpen = false, onClose, user = null }) => {
   const location = useLocation();
@@ -123,11 +124,8 @@ const MobileDrawer = ({ isOpen = false, onClose, user = null }) => {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border">
-            <Link to="/user-dashboard" className="flex items-center space-x-3" onClick={handleLinkClick}>
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <Icon name="Zap" size={20} color="white" />
-              </div>
-              <span className="text-xl font-bold gradient-text">PromoHive</span>
+            <Link to="/user-dashboard" onClick={handleLinkClick}>
+              <Logo size="md" variant="glow" className="cursor-pointer" />
             </Link>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <Icon name="X" size={24} />
