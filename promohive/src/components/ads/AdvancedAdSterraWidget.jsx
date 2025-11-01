@@ -24,26 +24,23 @@ const AdvancedAdSterraWidget = ({
   // Environment variable detection with comprehensive fallbacks
   const getAdSterraId = () => {
     // React/Create React App
-    if (process.env.REACT_APP_ADSTERRA_ID) {
-      return process.env.REACT_APP_ADSTERRA_ID;
+    if (process.env.REACT_APP_ADSTERRA_PUBLISHER_ID) {
+      return process.env.REACT_APP_ADSTERRA_PUBLISHER_ID;
     }
     // Vite
-    if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADSTERRA_ID) {
-      return import.meta.env.VITE_ADSTERRA_ID;
+    if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADSTERRA_PUBLISHER_ID) {
+      return import.meta.env.VITE_ADSTERRA_PUBLISHER_ID;
     }
     // Next.js
-    if (process.env.NEXT_PUBLIC_ADSTERRA_ID) {
-      return process.env.NEXT_PUBLIC_ADSTERRA_ID;
+    if (process.env.NEXT_PUBLIC_ADSTERRA_PUBLISHER_ID) {
+      return process.env.NEXT_PUBLIC_ADSTERRA_PUBLISHER_ID;
     }
     // Node.js/Server-side
-    if (process.env.ADSTERRA_ID) {
-      return process.env.ADSTERRA_ID;
+    if (process.env.ADSTERRA_PUBLISHER_ID) {
+      return process.env.ADSTERRA_PUBLISHER_ID;
     }
-    // Webpack DefinePlugin
-    if (typeof ADSTERRA_ID !== 'undefined') {
-      return ADSTERRA_ID;
-    }
-    return null;
+    // Fallback to direct value for production
+    return 'tW5T34Uzh3UEw';
   };
 
   // Auto-detect optimal placement based on DOM position

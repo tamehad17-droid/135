@@ -26,26 +26,23 @@ const AdvancedAdGemWidget = ({
   // Environment variable detection with comprehensive fallbacks
   const getAdGemId = () => {
     // React/Create React App
-    if (process.env.REACT_APP_ADGEM_ID) {
-      return process.env.REACT_APP_ADGEM_ID;
+    if (process.env.REACT_APP_ADGEM_APP_ID) {
+      return process.env.REACT_APP_ADGEM_APP_ID;
     }
     // Vite
-    if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADGEM_ID) {
-      return import.meta.env.VITE_ADGEM_ID;
+    if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADGEM_APP_ID) {
+      return import.meta.env.VITE_ADGEM_APP_ID;
     }
     // Next.js
-    if (process.env.NEXT_PUBLIC_ADGEM_ID) {
-      return process.env.NEXT_PUBLIC_ADGEM_ID;
+    if (process.env.NEXT_PUBLIC_ADGEM_APP_ID) {
+      return process.env.NEXT_PUBLIC_ADGEM_APP_ID;
     }
     // Node.js/Server-side
-    if (process.env.ADGEM_ID) {
-      return process.env.ADGEM_ID;
+    if (process.env.ADGEM_APP_ID) {
+      return process.env.ADGEM_APP_ID;
     }
-    // Webpack DefinePlugin
-    if (typeof ADGEM_ID !== 'undefined') {
-      return ADGEM_ID;
-    }
-    return null;
+    // Fallback to direct value for production
+    return '31409';
   };
 
   // Auto-detect optimal placement based on DOM position
