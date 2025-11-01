@@ -61,22 +61,62 @@ export const referralService = {
     }
   },
 
-  // Get referral stats
+  // Get referral stats with detailed level tracking
   async getReferralStats(userId) {
     try {
+      // Get user's level first
+      const { data: userData, error: userError } = await supabase
+        .from('user_profiles')
+        .select('level')
+        .eq('id', userId)
+        .single();
+
+      if (userError) throw userError;
+
+      // Get all referrals with referred user details
       const { data, error } = await supabase
         .from('referrals')
-        .select('*')
+        .select(`
+          *,
+          referred_profile:user_profiles!referrals_referred_id_fkey(
+            level,
+            status
+          )
+        `)
         .eq('referrer_id', userId);
 
       if (error) throw error;
+
+      // Get bonus rules for user's level
+      const { data: rules, error: rulesError } = await supabase
+        .from('referral_bonus_rules')
+        .select('*')
+        .eq('level', userData.level)
+        .eq('is_active', true);
+
+      if (rulesError) throw rulesError;
+
+      // Calculate active referrals at user's level
+      const activeReferralsAtLevel = data.filter(r => 
+        r.referred_profile?.level >= userData.level &&
+        r.referred_profile?.status === 'active'
+      ).length;
+
+      // Find next bonus milestone
+      const nextBonus = rules?.find(r => r.required_referrals > activeReferralsAtLevel);
 
       const stats = {
         totalReferrals: data.length,
         qualifiedReferrals: data.filter(r => r.is_qualified).length,
         paidReferrals: data.filter(r => r.is_paid).length,
         totalEarned: data.reduce((sum, r) => sum + parseFloat(r.bonus || 0), 0),
-        pendingRewards: data.filter(r => r.is_qualified && !r.is_paid).length
+        pendingRewards: data.filter(r => r.is_qualified && !r.is_paid).length,
+        // New stats
+        activeReferralsAtLevel,
+        currentLevel: userData.level,
+        nextBonusMilestone: nextBonus?.required_referrals || null,
+        nextBonusAmount: nextBonus?.bonus_amount || null,
+        referralsNeeded: nextBonus ? nextBonus.required_referrals - activeReferralsAtLevel : 0
       };
 
       return { stats, error: null };

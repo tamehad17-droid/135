@@ -110,15 +110,27 @@ const RegistrationForm = () => {
       }
 
       // Link referral if provided
-      try {
-        if (formData?.referralCode?.trim() && data?.user?.id) {
-          await supabase?.rpc('link_referral_by_code', {
-            p_referral_code: formData?.referralCode?.trim(),
-            p_new_user_id: data?.user?.id
-          });
+      if (formData?.referralCode?.trim() && data?.user?.id) {
+        const { data: referralResult, error: referralError } = await supabase?.rpc('link_referral_by_code', {
+          p_referral_code: formData?.referralCode?.trim(),
+          p_new_user_id: data?.user?.id
+        });
+
+        if (referralError) {
+          setErrors(prev => ({
+            ...prev,
+            referralCode: referralError.message || 'Failed to link referral code'
+          }));
+          return;
         }
-      } catch (e) {
-        // non-fatal if referral linking fails
+
+        if (!referralResult?.success) {
+          setErrors(prev => ({
+            ...prev,
+            referralCode: referralResult?.error || 'Invalid referral code'
+          }));
+          return;
+        }
       }
 
       // Set registration data and show pending approval message
