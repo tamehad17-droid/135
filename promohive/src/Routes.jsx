@@ -26,6 +26,8 @@ const TasksList = lazy(() => import('./pages/tasks-list'));
 const LevelUpgrade = lazy(() => import('./pages/level-upgrade'));
 const TasksManagement = lazy(() => import('./pages/tasks-management'));
 const UpgradeRequests = lazy(() => import('./pages/upgrade-requests'));
+const AdsPage = lazy(() => import('./pages/ads'));
+const AdminAdRevenue = lazy(() => import('./pages/admin/ad-revenue'));
 
 // Loading component
 const LoadingFallback = () => (
@@ -58,6 +60,7 @@ const Routes = () => {
           <Route path="/tasks-management" element={<ProtectedRoute requireAdmin={true}><TasksManagement /></ProtectedRoute>} />
           <Route path="/upgrade-requests" element={<ProtectedRoute requireAdmin={true}><UpgradeRequests /></ProtectedRoute>} />
           <Route path="/users-management" element={<ProtectedRoute requireAdmin={true}><UsersManagement /></ProtectedRoute>} />
+          <Route path="/admin/ad-revenue" element={<ProtectedRoute requireAdmin={true}><AdminAdRevenue /></ProtectedRoute>} />
           
           {/* User routes - require authentication only */}
           <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
@@ -70,6 +73,7 @@ const Routes = () => {
           <Route path="/proofs-management" element={<ProtectedRoute><ProofsManagement /></ProtectedRoute>} />
           <Route path="/withdrawal-request" element={<ProtectedRoute><WithdrawalRequest /></ProtectedRoute>} />
           <Route path="/profile-settings" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
+          <Route path="/ads" element={<ProtectedRoute><AdsPage /></ProtectedRoute>} />
           
           {/* 404 */}
           <Route path="*" element={<NotFound />} />

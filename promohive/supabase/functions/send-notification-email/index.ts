@@ -19,9 +19,9 @@ serve(async (req) => {
     // Get SMTP settings from environment
     const SMTP_HOST = (globalThis as any)?.Deno?.env?.get('SMTP_HOST') || 'smtp.hostinger.com';
     const SMTP_PORT = parseInt((globalThis as any)?.Deno?.env?.get('SMTP_PORT') || '465');
-    const SMTP_USER = (globalThis as any)?.Deno?.env?.get('SMTP_USER') || 'promohive@globalpromonetwork.store';
-    const SMTP_PASS = (globalThis as any)?.Deno?.env?.get('SMTP_PASS');
-    const SMTP_FROM = (globalThis as any)?.Deno?.env?.get('SMTP_FROM') || 'promohive@globalpromonetwork.store';
+    const SMTP_USER = (globalThis as any)?.Deno?.env?.get('SMTP_USER') || 'admin@globalpromonetwork.online';
+    const SMTP_PASS = (globalThis as any)?.Deno?.env?.get('SMTP_PASS') || 'your-smtp-password';
+    const SMTP_FROM = (globalThis as any)?.Deno?.env?.get('SMTP_FROM') || 'admin@globalpromonetwork.online';
     
     if (!SMTP_PASS) {
       throw new Error('SMTP_PASS is not configured');

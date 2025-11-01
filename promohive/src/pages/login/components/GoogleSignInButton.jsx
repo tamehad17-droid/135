@@ -8,14 +8,18 @@ const GoogleSignInButton = ({ isLoading, setIsLoading }) => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
+          redirectTo: `${window.location.origin}/user-dashboard`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         }
       });
       
       if (error) throw error;
     } catch (error) {
       console.error('Google sign in error:', error);
-      alert('Failed to sign in with Google. Please try again.');
+      alert('فشل تسجيل الدخول عبر Google. يرجى المحاولة مرة أخرى.');
     } finally {
       setIsLoading(false);
     }
